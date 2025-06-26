@@ -8,22 +8,21 @@
 
 <body>
     <h1>献立一覧</h1>
+
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="キーワード検索（日付・メニュー）" value="{{ query }}">
+        <button type="submit">検索</button>
+    </form>
+
     <ul>
         {% for mealplan in mealplans %}
         <li>
             <strong><a href="{% url 'mealplan_detail' mealplan.pk %}">{{ mealplan.date }}</a></strong><br>
             {{ mealplan.meal_type }}<br>
-            {{ mealplan.menu|linebreaksbr }}<br>
-            <ul>
-                {% for ingredient in mealplan.ingredients.all %}
-                <li>{{ ingredient.name }} ({{ ingredient.quantity }})</li>
-                {% endfor %}
-            </ul>
-            <a href="{% url 'mealplan_edit' mealplan.pk %}">編集</a>
-            <a href="{% url 'mealplan_delete' mealplan.pk %}">削除</a>
+            {{ mealplan.menu|linebreaksbr }}
         </li>
         {% empty %}
-        <li>献立が登録されていません。</li>
+        <li>一致する献立がありません。</li>
         {% endfor %}
     </ul>
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>食材一覧</title>
+    <title>賞味期限切れの食材</title>
     <style>
         .expired {
             color: red;
@@ -13,13 +13,7 @@
 </head>
 
 <body>
-    <h1>食材一覧（賞味期限順）</h1>
-
-    <form method="get" action="">
-        <input type="text" name="q" placeholder="キーワード検索" value="{{ query }}">
-        <button type="submit">検索</button>
-    </form>
-
+    <h1>賞味期限切れの食材</h1>
     <table border="1">
         <tr>
             <th>名前</th>
@@ -31,9 +25,7 @@
         <tr>
             <td>{{ ingredient.name }}</td>
             <td>{{ ingredient.quantity }}</td>
-            <td class="{% if ingredient.expiration_date and ingredient.expiration_date < today %}expired{% endif %}">
-                {{ ingredient.expiration_date }}
-            </td>
+            <td class="expired">{{ ingredient.expiration_date }}</td>
             <td>
                 <a href="{% url 'ingredient_edit' ingredient.pk %}">編集</a> |
                 <a href="{% url 'ingredient_delete' ingredient.pk %}">削除</a>
@@ -41,16 +33,13 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan="4">登録された食材がありません。</td>
+            <td colspan="4">賞味期限切れの食材はありません。</td>
         </tr>
         {% endfor %}
     </table>
 
     <br>
-    <a href="{% url 'add_ingredient' %}">＋ 食材を追加する</a> |
-    <a href="{% url 'mealplan_list' %}">献立一覧に戻る</a>
-    <a href="{% url 'expired_ingredients' %}">🔻 賞味期限切れの食材を確認する</a>
-
+    <a href="{% url 'ingredient_list' %}">← 食材一覧に戻る</a>
 </body>
 
 </html>
