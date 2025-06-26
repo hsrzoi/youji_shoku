@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>幼児食献立一覧</title>
 </head>
+
 <body>
     <h1>献立一覧</h1>
     <ul>
         {% for mealplan in mealplans %}
-            <li>
-                <strong>{{ mealplan.date }}</strong><br>
-                {{ mealplan.description }}<br>
-                <ul>
-                    {% for ingredient in mealplan.ingredients.all %}
-                        <li>{{ ingredient.name }} ({{ ingredient.quantity }})</li>
-                    {% endfor %}
-                </ul>
-            </li>
+        <li>
+            <strong><a href="{% url 'mealplan_detail' mealplan.pk %}">{{ mealplan.date }}</a></strong><br>
+            {{ mealplan.meal_type }}<br>
+            {{ mealplan.menu|linebreaksbr }}<br>
+            <ul>
+                {% for ingredient in mealplan.ingredients.all %}
+                <li>{{ ingredient.name }} ({{ ingredient.quantity }})</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'mealplan_edit' mealplan.pk %}">編集</a>
+            <a href="{% url 'mealplan_delete' mealplan.pk %}">削除</a>
+        </li>
         {% empty %}
-            <li>献立が登録されていません。</li>
+        <li>献立が登録されていません。</li>
         {% endfor %}
     </ul>
+
+
+    <h2>献立を追加</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <p>
+            {{ form.date.label_tag }}<br>
+            {{ form.date }}
+        </p>
+        <p>
+            {{ form.meal_type.label_tag }}<br>
+            {{ form.meal_type }}
+        </p>
+        <p>
+            {{ form.menu.label_tag }}<br>
+            {{ form.menu }}
+        </p>
+        <button type="submit">追加</button>
+    </form>
+
 </body>
+
 </html>

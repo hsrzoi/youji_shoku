@@ -5,6 +5,7 @@ class Ingredient(models.Model):
     category = models.CharField(max_length=50)
     allergy_info = models.CharField(max_length=100, blank=True)
     quantity = models.CharField(max_length=50, blank=True, null=True)  # 量など
+    expiration_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -24,6 +25,8 @@ class MealIngredient(models.Model):
 
 class MealPlan(models.Model):
     date = models.DateField()
+    meal_type = models.CharField(max_length=100)  # ← これが必要
+    menu = models.TextField()
     description = models.TextField(blank=True)
     ingredients = models.ManyToManyField(Ingredient, blank=True)
 

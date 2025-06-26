@@ -11,3 +11,6 @@ class MealPlanForm(forms.ModelForm):
     class Meta:
         model = MealPlan
         fields = ['date', 'meal_type', 'menu']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}), 
+        }

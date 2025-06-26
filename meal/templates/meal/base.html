@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}幼児食アプリ{% endblock %}</title>
+</head>
+
+<body>
+    <h1>幼児食管理アプリ</h1>
+    <nav>
+        <a href="{% url 'mealplan_list' %}">献立一覧</a> |
+        <a href="{% url 'add_mealplan' %}">献立追加</a> |
+        <a href="{% url 'add_ingredient' %}">食材追加</a> |
+        <a href="{% url 'ingredient_list' %}">食材一覧</a>
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

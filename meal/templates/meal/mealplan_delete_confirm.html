@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>献立削除確認</title>
+</head>
+
+<body>
+    <h1>献立削除確認</h1>
+    <p>{{ mealplan.date }} の献立を本当に削除しますか？</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">削除</button>
+        <a href="{% url 'mealplan_list' %}">キャンセル</a>
+    </form>
+</body>
+
+</html>

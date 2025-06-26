@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>献立詳細</title>
+</head>
+<body>
+    <h1>{{ mealplan.date }} の献立</h1>
+    <p><strong>Meal Type:</strong> {{ mealplan.meal_type }}</p>
+    <p><strong>Menu:</strong><br>{{ mealplan.menu|linebreaksbr }}</p>
+    <a href="{% url 'mealplan_list' %}">← 戻る</a>
+</body>
+</html>

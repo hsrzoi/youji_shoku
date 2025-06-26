@@ -1,0 +1,9 @@
+{% extends 'meal/base.html' %}
+{% block content %}
+<h2>食材を追加</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">追加</button>
+</form>
+{% endblock %}
